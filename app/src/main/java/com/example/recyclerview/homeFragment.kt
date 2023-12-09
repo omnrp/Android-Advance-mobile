@@ -5,55 +5,67 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.recyclerview.databinding.FragmentHomeBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [homeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class homeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var newRecyclerView: RecyclerView
+    private lateinit var newArrayList: ArrayList<MyAdapter.Waifu>
+    lateinit var imageId: Array<Int>
+    lateinit var heading: Array<String>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home,container,false)
+
+        val newRecyclerView : RecyclerView = view.findViewById(R.id.recyclerview)
+        newRecyclerView.layoutManager = LinearLayoutManager(context)
+        val adapter = MyAdapter(getUserdata())
+        newRecyclerView.adapter = adapter
+        return view
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment homeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            homeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun getUserdata() : List<MyAdapter.Waifu>{
+        imageId = arrayOf(
+            R.drawable.xp1,
+            R.drawable.xp3,
+            R.drawable.xp4,
+            R.drawable.xp5,
+            R.drawable.xp6,
+            R.drawable.xp7,
+            R.drawable.xp8
+        )
+//recyclerview
+        heading = arrayOf(
+            "Waifu Image 1",
+            "Waifu Image 2",
+            "Waifu Image 3",
+            "Waifu Image 4",
+            "Waifu Image 5",
+            "Waifu Image 6",
+            "Waifu Image 7"
+        )
+
+        return listOf(
+            MyAdapter.Waifu(R.drawable.xp1, "Waifu 1"),
+            MyAdapter.Waifu(R.drawable.xp3, "Waifu 2"),
+            MyAdapter.Waifu(R.drawable.xp4, "Waifu 3"),
+            MyAdapter.Waifu(R.drawable.xp5, "Waifu 4"),
+            MyAdapter.Waifu(R.drawable.xp6, "Waifu 5"),
+            MyAdapter.Waifu(R.drawable.xp7, "Waifu 6"),
+            MyAdapter.Waifu(R.drawable.xp8, "Waifu 7"),
+
+        )
+
+
     }
+
 }

@@ -6,13 +6,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
-import java.util.zip.Inflater
 
-class MyAdapter(private val WaifuList : ArrayList<Waifu>) :
+class MyAdapter(private val WaifuList: List<Waifu>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
 
+    data class Waifu(var titleimage : Int, var heading : String)
+    class MyViewHolder(itemview : View) : RecyclerView.ViewHolder(itemview){
 
+        val titleimage : ShapeableImageView = itemview.findViewById(R.id.title_image)
+        val tvHeading : TextView = itemview.findViewById(R.id.tvHeading)
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
@@ -32,11 +37,5 @@ class MyAdapter(private val WaifuList : ArrayList<Waifu>) :
         return WaifuList.size
     }
 
-    class MyViewHolder(itemview : View) : RecyclerView.ViewHolder(itemview){
-
-        val titleimage : ShapeableImageView = itemview.findViewById(R.id.title_image)
-        val tvHeading : TextView = itemview.findViewById(R.id.tvHeading)
-
-    }
 
 }
